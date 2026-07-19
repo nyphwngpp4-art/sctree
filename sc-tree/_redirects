@@ -1,4 +1,0 @@
-# Internal docs deploy alongside the site (factory layout keeps them in the
-# site folder) — shadow them so they are never publicly readable.
-/README.md / 302
-/README / 302
