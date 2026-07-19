@@ -1,0 +1,63 @@
+/* SC Tree Service LLC — Theme C (Land & Ranch)
+   Levers: green-forward palette + tick divider + cream paper
+   (see README.md for rationale / sibling-proof against hot-fence & lucky-t-feed) */
+:root{
+  --font-display:"Zilla Slab",Georgia,serif;
+  --display-transform:none; --display-weight:700; --display-tracking:0; --display-lh:1.08;
+  --paper:#f4efe3; --surface:#fbf8f0; --surface-2:#e7dfcd;
+  --ink:#28271f; --ink-soft:#4c4a3c; --ink-faint:#78745f;
+  --line:#d8cdb4; --line-strong:#b6a888;
+  --brand:#2f4131; --on-brand:#f4efe3;             /* forest green */
+  --accent:#8a5a2b; --on-accent:#fbf8f0;           /* saddle brown */
+  --accent-2:#4a6b3c;
+  --radius:6px; --radius-lg:10px; --border-w:2px; --rule-w:1px;
+  --shadow:none; --lift:1px;
+  --texture:radial-gradient(circle at 1px 1px, rgba(120,116,95,.10) 1px, transparent 0);
+  --divider-color:#b6a888; --divider-accent:var(--accent);
+  --slot-bg:#efe8d7; --slot-line:#b6a888; --slot-tag-bg:#2f4131;
+
+  /* photo hero — Theme C green-brown tint (content side reads near-black
+     green, photo side opens to a warm olive-brown so the oak canopy shows) */
+  --hero-tint-a:#141a12;
+  --hero-tint-b:#3b3524;
+  --hero-bar:3px;
+}
+body{background-image:var(--texture); background-size:14px 14px;}
+
+/* lever: cream header, plain rule underbar (no extra bar weight) */
+.site-header{background:var(--paper);}
+
+/* storm-damage call-out band inside the centerpiece */
+.storm{
+  border:var(--border-w) solid var(--line);
+  border-radius:var(--radius-lg);
+  background:var(--surface-2);
+  padding:clamp(18px,4vw,26px);
+  margin-top:clamp(18px,4vw,26px);
+}
+.storm__tag{
+  font-family:var(--font-mono);font-size:.68rem;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--ink-faint);margin-bottom:.6em;display:block;
+}
+.storm h3{font-size:1.3rem;margin-bottom:.4em}
+.storm p{color:var(--ink-soft);max-width:48ch}
+.storm .btn{margin-top:14px}
+
+/* insurance/bonding ASK OWNER slot — inline chip block, distinct from photo slots */
+.fact-slot{
+  display:flex;flex-wrap:wrap;align-items:center;gap:10px;
+  background:var(--slot-bg);background-image:var(--hatch);
+  border:2px dashed var(--slot-line);border-radius:var(--radius);
+  padding:14px 16px;margin-top:16px;
+}
+.fact-slot__note{
+  font-family:var(--font-mono);font-size:.78rem;color:var(--slot-ink,var(--ink-soft));
+}
+
+/* gallery intro copy above the before/after grid */
+.gallery-intro{max-width:52ch;margin-bottom:clamp(16px,3vw,24px)}
+
+.gallery-pairs{grid-template-columns:1fr}
+@media(min-width:600px){
+  .gallery-pairs{grid-template-columns:1fr 1fr}
+}
