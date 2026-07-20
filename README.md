@@ -35,15 +35,13 @@ Every claim on the customer site is verified:
 
 ## Hero video
 
-The hero ships as a real-photo poster. To turn on the video loop:
-
-1. Add `assets/hero-loop.webm` and/or `assets/hero-loop.mp4`.
-2. Add the `data-hero-video` attribute to `<div class="hero__media"
-   id="hero-media">` in `index.html`.
-
-`app.js` then swaps the loop in (muted, looped, playsInline) — except for
-visitors with reduced-motion or data-saver enabled, who keep the still
-photo.
+Active. The hero loop was generated from the real climber photo
+(Seedance image-to-video, 7s, 16:9) and ships as `assets/hero-loop.mp4`
+(H.264, preferred, 1.1 MB) with `assets/hero-loop.webm` (VP9 fallback for
+codec-less Chromium builds). `app.js` swaps it in over the real-photo
+poster (muted, looped, playsInline) — except for visitors with
+reduced-motion or data-saver enabled, who keep the still photo. To disable,
+remove the `data-hero-video` attribute from `#hero-media` in `index.html`.
 
 ## Vendored
 

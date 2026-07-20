@@ -333,9 +333,11 @@
     var conn = navigator.connection || {};
     if (reduced || conn.saveData || /(^|-)2g/.test(conn.effectiveType || '')) { return; }
 
+    // mp4 first: every mainstream browser plays H.264 and it is the smaller
+    // file here; the VP9 webm is the fallback for codec-less Chromium builds.
     var sources = [
-      { url: 'assets/hero-loop.webm', type: 'video/webm' },
-      { url: 'assets/hero-loop.mp4', type: 'video/mp4' }
+      { url: 'assets/hero-loop.mp4', type: 'video/mp4' },
+      { url: 'assets/hero-loop.webm', type: 'video/webm' }
     ];
     Promise.all(sources.map(function (s) {
       return fetch(s.url, { method: 'HEAD' }).then(function (r) {
