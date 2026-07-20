@@ -275,36 +275,32 @@
   /* ====================================================================
      Lightbox for work photos
      ==================================================================== */
+  // Order matches the data-lightbox indices on the service images.
   var WORK = [
-    {
-      src: 'assets/work-climber-639.jpg', w: 639, h: 800,
-      alt: 'Climber on rope and saddle near the top of a tall pine trunk, dwarfed by the tree, with a chainsaw hanging from the harness',
-      cap: 'Working the crown of a dead pine, one section at a time.'
-    },
     {
       src: 'assets/work-climber-roof-600.jpg', w: 600, h: 800,
       alt: 'Climber roped into a bare tree directly above a house with a solar-panel roof, taking down limbs section by section',
-      cap: 'Roped in over a house and a solar roof, dropping limbs clear of both.'
-    },
-    {
-      src: 'assets/work-chipper-1067.jpg', w: 1067, h: 800,
-      alt: 'Worker dragging cut brush toward a yellow wood chipper and dump trailer on a cleared, leaf-covered lot among bare oaks',
-      cap: 'Clearing a lot and running the brush straight through the chipper.'
+      cap: 'Tree removal: roped in over a house and a solar roof, dropping limbs clear of both.'
     },
     {
       src: 'assets/work-lift-oak-600.jpg', w: 600, h: 800,
       alt: 'Worker in a red bucket lift reaching into a large tree being reduced, working above a wooden privacy fence under a clear blue sky',
-      cap: 'Taking a big tree down in pieces from the lift, over a fence line.'
+      cap: 'Trimming: taking a big tree down in pieces from the lift, over a fence line.'
     },
     {
       src: 'assets/work-stump-600.jpg', w: 600, h: 800,
       alt: 'Red tracked stump grinder positioned next to a ground-down stump in an open pasture with a white fence line behind',
-      cap: 'Grinding a stump down below grade so the ground is usable again.'
+      cap: 'Stump grinding: taken down below grade so the ground is usable again.'
     },
     {
       src: 'assets/work-cleanup-1067.jpg', w: 1067, h: 800,
       alt: 'Two crew members feeding cut branches into a chipper beside a loaded dump truck on a residential street in front of a brick home',
-      cap: 'Cleaning up on site and hauling the debris off when the work is done.'
+      cap: 'Storm cleanup: hauling downed limbs off site through the chipper.'
+    },
+    {
+      src: 'assets/work-chipper-1067.jpg', w: 1067, h: 800,
+      alt: 'Worker dragging cut brush toward a yellow wood chipper and dump trailer on a cleared, leaf-covered lot among bare oaks',
+      cap: 'Debris removal: brush and limbs run straight through the chipper and hauled off.'
     }
   ];
   var lightbox = document.getElementById('lightbox');
