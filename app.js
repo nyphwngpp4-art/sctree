@@ -275,16 +275,32 @@
   /* ====================================================================
      Lightbox for work photos
      ==================================================================== */
+  // Order matches the data-lightbox indices on the service images.
   var WORK = [
     {
-      src: 'assets/work-climber-639.jpg', w: 639, h: 800,
-      alt: 'Climber on rope and saddle near the top of a tall pine trunk, dwarfed by the tree, with a chainsaw hanging from the harness',
-      cap: 'Working the crown of a dead pine, one section at a time.'
+      src: 'assets/work-climber-roof-600.jpg', w: 600, h: 800,
+      alt: 'Climber roped into a bare tree directly above a house with a solar-panel roof, taking down limbs section by section',
+      cap: 'Tree removal: roped in over a house and a solar roof, dropping limbs clear of both.'
     },
     {
-      src: 'assets/work-bucket-600.jpg', w: 600, h: 800,
-      alt: 'Bucket lift boom extended over a home’s roofline to reach dead limbs in a large bare oak against a blue sky',
-      cap: 'Lift work over the roofline, reaching dead limbs without touching the house.'
+      src: 'assets/work-lift-oak-600.jpg', w: 600, h: 800,
+      alt: 'Worker in a red bucket lift reaching into a large tree being reduced, working above a wooden privacy fence under a clear blue sky',
+      cap: 'Trimming: taking a big tree down in pieces from the lift, over a fence line.'
+    },
+    {
+      src: 'assets/work-stump-600.jpg', w: 600, h: 800,
+      alt: 'Red tracked stump grinder positioned next to a ground-down stump in an open pasture with a white fence line behind',
+      cap: 'Stump grinding: taken down below grade so the ground is usable again.'
+    },
+    {
+      src: 'assets/work-cleanup-1067.jpg', w: 1067, h: 800,
+      alt: 'Two crew members feeding cut branches into a chipper beside a loaded dump truck on a residential street in front of a brick home',
+      cap: 'Storm cleanup: hauling downed limbs off site through the chipper.'
+    },
+    {
+      src: 'assets/work-chipper-1067.jpg', w: 1067, h: 800,
+      alt: 'Worker dragging cut brush toward a yellow wood chipper and dump trailer on a cleared, leaf-covered lot among bare oaks',
+      cap: 'Debris removal: brush and limbs run straight through the chipper and hauled off.'
     }
   ];
   var lightbox = document.getElementById('lightbox');
@@ -333,44 +349,46 @@
     var conn = navigator.connection || {};
     if (reduced || conn.saveData || /(^|-)2g/.test(conn.effectiveType || '')) { return; }
 
-    // mp4 first: every mainstream browser plays H.264 and it is the smaller
-    // file here; the VP9 webm is the fallback for codec-less Chromium builds.
+    // mp4 (H.264) first for Safari; VP9 webm is the fallback. Build the
+    // element, set muted BEFORE anything else (required for autoplay on
+    // Safari/iOS), append to the DOM, then load() and play(). Appending
+    // before load() is the order Safari expects; waiting on 'canplay' to
+    // append is unreliable there.
     var sources = [
       { url: 'assets/hero-loop.mp4', type: 'video/mp4' },
       { url: 'assets/hero-loop.webm', type: 'video/webm' }
     ];
-    Promise.all(sources.map(function (s) {
-      return fetch(s.url, { method: 'HEAD' }).then(function (r) {
-        var ct = (r.headers.get('content-type') || '');
-        return (r.ok && ct.indexOf('video') === 0) ? s : null;
-      }).catch(function () { return null; });
-    })).then(function (found) {
-      var avail = found.filter(Boolean);
-      if (!avail.length) { return; }
-      var v = document.createElement('video');
-      v.muted = true;
-      v.defaultMuted = true;
-      v.loop = true;
-      v.autoplay = true;
-      v.playsInline = true;
-      v.setAttribute('playsinline', '');
-      v.setAttribute('muted', '');
-      v.setAttribute('aria-hidden', 'true');
-      v.setAttribute('tabindex', '-1');
-      v.poster = 'assets/work-climber-639.jpg';
-      v.style.position = 'absolute';
-      v.style.inset = '0';
-      v.style.width = '100%';
-      v.style.height = '100%';
-      v.style.objectFit = 'cover';
-      avail.forEach(function (s) {
-        var src = document.createElement('source');
-        src.src = s.url;
-        src.type = s.type;
-        v.appendChild(src);
-      });
-      v.addEventListener('canplay', function () { media.appendChild(v); }, { once: true });
-      v.load();
+    var v = document.createElement('video');
+    v.muted = true;
+    v.defaultMuted = true;
+    v.setAttribute('muted', '');
+    v.loop = true;
+    v.setAttribute('loop', '');
+    v.autoplay = true;
+    v.setAttribute('autoplay', '');
+    v.playsInline = true;
+    v.setAttribute('playsinline', '');
+    v.setAttribute('webkit-playsinline', '');
+    v.preload = 'auto';
+    v.setAttribute('aria-hidden', 'true');
+    v.setAttribute('tabindex', '-1');
+    v.className = 'hero__video';
+    v.poster = 'assets/work-climber-639.jpg';
+    sources.forEach(function (s) {
+      var src = document.createElement('source');
+      src.src = s.url;
+      src.type = s.type;
+      v.appendChild(src);
     });
+    // If nothing can decode, leave the still-photo hero untouched.
+    v.addEventListener('error', function () {
+      if (v.parentNode) { v.parentNode.removeChild(v); }
+    });
+    media.appendChild(v);
+    v.load();
+    var attempt = v.play();
+    if (attempt && typeof attempt.catch === 'function') {
+      attempt.catch(function () { /* autoplay attribute still applies; poster stays up otherwise */ });
+    }
   })();
 })();
