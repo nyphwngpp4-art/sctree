@@ -333,44 +333,46 @@
     var conn = navigator.connection || {};
     if (reduced || conn.saveData || /(^|-)2g/.test(conn.effectiveType || '')) { return; }
 
-    // mp4 first: every mainstream browser plays H.264 and it is the smaller
-    // file here; the VP9 webm is the fallback for codec-less Chromium builds.
+    // mp4 (H.264) first for Safari; VP9 webm is the fallback. Build the
+    // element, set muted BEFORE anything else (required for autoplay on
+    // Safari/iOS), append to the DOM, then load() and play(). Appending
+    // before load() is the order Safari expects; waiting on 'canplay' to
+    // append is unreliable there.
     var sources = [
       { url: 'assets/hero-loop.mp4', type: 'video/mp4' },
       { url: 'assets/hero-loop.webm', type: 'video/webm' }
     ];
-    Promise.all(sources.map(function (s) {
-      return fetch(s.url, { method: 'HEAD' }).then(function (r) {
-        var ct = (r.headers.get('content-type') || '');
-        return (r.ok && ct.indexOf('video') === 0) ? s : null;
-      }).catch(function () { return null; });
-    })).then(function (found) {
-      var avail = found.filter(Boolean);
-      if (!avail.length) { return; }
-      var v = document.createElement('video');
-      v.muted = true;
-      v.defaultMuted = true;
-      v.loop = true;
-      v.autoplay = true;
-      v.playsInline = true;
-      v.setAttribute('playsinline', '');
-      v.setAttribute('muted', '');
-      v.setAttribute('aria-hidden', 'true');
-      v.setAttribute('tabindex', '-1');
-      v.poster = 'assets/work-climber-639.jpg';
-      v.style.position = 'absolute';
-      v.style.inset = '0';
-      v.style.width = '100%';
-      v.style.height = '100%';
-      v.style.objectFit = 'cover';
-      avail.forEach(function (s) {
-        var src = document.createElement('source');
-        src.src = s.url;
-        src.type = s.type;
-        v.appendChild(src);
-      });
-      v.addEventListener('canplay', function () { media.appendChild(v); }, { once: true });
-      v.load();
+    var v = document.createElement('video');
+    v.muted = true;
+    v.defaultMuted = true;
+    v.setAttribute('muted', '');
+    v.loop = true;
+    v.setAttribute('loop', '');
+    v.autoplay = true;
+    v.setAttribute('autoplay', '');
+    v.playsInline = true;
+    v.setAttribute('playsinline', '');
+    v.setAttribute('webkit-playsinline', '');
+    v.preload = 'auto';
+    v.setAttribute('aria-hidden', 'true');
+    v.setAttribute('tabindex', '-1');
+    v.className = 'hero__video';
+    v.poster = 'assets/work-climber-639.jpg';
+    sources.forEach(function (s) {
+      var src = document.createElement('source');
+      src.src = s.url;
+      src.type = s.type;
+      v.appendChild(src);
     });
+    // If nothing can decode, leave the still-photo hero untouched.
+    v.addEventListener('error', function () {
+      if (v.parentNode) { v.parentNode.removeChild(v); }
+    });
+    media.appendChild(v);
+    v.load();
+    var attempt = v.play();
+    if (attempt && typeof attempt.catch === 'function') {
+      attempt.catch(function () { /* autoplay attribute still applies; poster stays up otherwise */ });
+    }
   })();
 })();
