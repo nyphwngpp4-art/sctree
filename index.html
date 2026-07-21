@@ -23,6 +23,7 @@
 <link rel="preload" as="font" type="font/woff2" href="assets/fonts/barlow-cond-700.woff2" crossorigin>
 <link rel="preload" as="font" type="font/woff2" href="assets/fonts/barlow-400.woff2" crossorigin>
 <link rel="preload" as="image" imagesrcset="assets/work-climber-480.webp 480w, assets/work-climber-639.webp 639w" imagesizes="(min-width:880px) 42vw, 100vw" fetchpriority="high">
+<link rel="preload" as="video" href="assets/hero-loop.mp4" type="video/mp4">
 <link rel="stylesheet" href="styles.css">
 <script type="application/ld+json">
 {
@@ -108,7 +109,7 @@
 <!-- ============================ HERO ============================ -->
 <section class="hero" id="top" aria-label="SC Tree Service introduction">
   <div class="hero__grid">
-    <div class="hero__media" id="hero-media" data-hero-video>
+    <div class="hero__media" id="hero-media">
       <picture>
         <source type="image/webp" srcset="assets/work-climber-320.webp 320w, assets/work-climber-480.webp 480w, assets/work-climber-639.webp 639w" sizes="(min-width:880px) 42vw, 100vw">
         <img src="assets/work-climber-639.jpg"
@@ -117,6 +118,10 @@
              width="639" height="800" fetchpriority="high" decoding="async"
              alt="SC Tree Service climber roped into the top of a tall pine, working the bare crown high above the surrounding oaks">
       </picture>
+      <video class="hero__video" autoplay muted loop playsinline preload="auto" poster="assets/work-climber-639.jpg" aria-hidden="true" tabindex="-1">
+        <source src="assets/hero-loop.mp4" type="video/mp4">
+        <source src="assets/hero-loop.webm" type="video/webm">
+      </video>
     </div>
     <div class="hero__ring" aria-hidden="true"></div>
     <div class="hero__copy">
@@ -136,18 +141,25 @@
   </div>
 </section>
 
+<section class="reputation" aria-label="Google review rating">
+  <div class="container reputation__row">
+    <strong><span aria-hidden="true">★★★★★</span> Perfect 5.0 rating</strong>
+    <span>Based on 316 Google reviews</span>
+  </div>
+</section>
+
 <!-- ============================ REVIEWS ============================ -->
 <section class="section" id="reviews" aria-labelledby="reviews-h">
   <div class="container">
     <div class="section__head">
       <p class="eyebrow">Reviews</p>
       <h2 class="display" id="reviews-h">The kind of work people recommend by name.</h2>
-      <p class="section__note">Excerpts from customer reviews published on SC Tree Service&rsquo;s website, quoted as written.</p>
+      <p class="section__note">Excerpts from customer reviews, quoted as written. Reviewer names use first name and last initial.</p>
     </div>
 
     <figure class="review-feature">
       <blockquote>&ldquo;I'm Thrilled with the work SC Tree Service provided!!&rdquo;</blockquote>
-      <figcaption class="review__by"><strong>Shawn B.</strong></figcaption>
+      <figcaption class="review__by"><strong>Shawn B.</strong> &middot; Google review</figcaption>
     </figure>
 
     <div class="review-wall">
@@ -159,12 +171,12 @@
       <figure class="review">
         <span class="review__tag">Cleanup</span>
         <blockquote>&ldquo;Left the place nice and clean.&rdquo;</blockquote>
-        <figcaption class="review__by"><strong>Mark Y.</strong> &middot; Red oak thinning</figcaption>
+        <figcaption class="review__by"><strong>Mark Y.</strong> &middot; Google review</figcaption>
       </figure>
       <figure class="review">
         <span class="review__tag">Communication</span>
         <blockquote>&ldquo;&hellip;impressed with his professionalism and work ethic.&rdquo;</blockquote>
-        <figcaption class="review__by"><strong>Luann M.</strong></figcaption>
+        <figcaption class="review__by"><strong>Luann M.</strong> &middot; Google review</figcaption>
       </figure>
       <figure class="review">
         <span class="review__tag">Speed</span>
@@ -174,12 +186,12 @@
       <figure class="review">
         <span class="review__tag">Big removals</span>
         <blockquote>&ldquo;&hellip;awesome cleanup.&rdquo;</blockquote>
-        <figcaption class="review__by"><strong>Clayton W.</strong> &middot; Live oak removal, Early TX</figcaption>
+        <figcaption class="review__by"><strong>Clayton W.</strong> &middot; Google review</figcaption>
       </figure>
       <figure class="review">
         <span class="review__tag">The result</span>
         <blockquote>&ldquo;&hellip;it's a relief for me to have it done.&rdquo;</blockquote>
-        <figcaption class="review__by"><strong>Joe S.</strong></figcaption>
+        <figcaption class="review__by"><strong>Joe S.</strong> &middot; Google review</figcaption>
       </figure>
     </div>
   </div>
@@ -201,7 +213,7 @@
         </picture>
       </button>
       <div class="svc__body">
-        <h3>Tree Removal</h3>
+        <h3><a href="tree-removal-brownwood-tx/">Tree Removal</a></h3>
         <p>Dead, dying, storm-split, or leaning where it shouldn&rsquo;t. Trees come down in controlled sections, planned around whatever sits underneath them.</p>
         <ul class="svc__uses">
           <li>Dead or dying trees</li>
@@ -221,7 +233,7 @@
         </picture>
       </button>
       <div class="svc__body">
-        <h3>Tree Trimming &amp; Pruning</h3>
+        <h3><a href="tree-trimming-brownwood-tx/">Tree Trimming &amp; Pruning</a></h3>
         <p>Crown thinning, raising, and reduction, dead wood cut out, and limbs brought back off roofs and drives, so the tree is healthier and the house is safer.</p>
         <ul class="svc__uses">
           <li>Limbs on the house</li>
@@ -241,7 +253,7 @@
         </picture>
       </button>
       <div class="svc__body">
-        <h3>Stump Grinding</h3>
+        <h3><a href="stump-grinding-brownwood-tx/">Stump Grinding</a></h3>
         <p>The stump gets ground down below grade instead of sitting in the yard for years. Works after our removals or on stumps someone else left behind.</p>
         <ul class="svc__uses">
           <li>After a removal</li>
@@ -260,7 +272,7 @@
         </picture>
       </button>
       <div class="svc__body">
-        <h3>Storm Cleanup</h3>
+        <h3><a href="storm-cleanup-brownwood-tx/">Storm Cleanup</a></h3>
         <p>Downed limbs, split trunks, and hangers left overhead after Central Texas weather. If an insurance claim is involved, mention it when you reach out.</p>
         <ul class="svc__uses">
           <li>Limbs down in the yard</li>
@@ -311,13 +323,11 @@
           <p class="quote-demo__label">What Saul receives</p>
           <pre class="msg-preview">SC TREE ESTIMATE REQUEST
 
-<span class="dim">Name:</span> Your name
-<span class="dim">Phone:</span> Your number
 <span class="dim">Location:</span> Street or area
 <span class="dim">Service:</span> Tree removal
 <span class="dim">Near:</span> House, fence
 <span class="dim">Urgency:</span> Within the next few weeks
-<span class="dim">Preferred reply:</span> Text
+<span class="dim">Reply by:</span> Text or call this number
 
 I'll attach photos in this message.</pre>
         </div>
@@ -326,6 +336,24 @@ I'll attach photos in this message.</pre>
   </div>
 </section>
 
+<!-- ============================ WORK ============================ -->
+<section class="section" id="work" aria-labelledby="work-h">
+  <div class="container">
+    <div class="section__head">
+      <p class="eyebrow">The work</p>
+      <h2 class="display" id="work-h">This is the job.</h2>
+      <p class="lead">Real SC Tree Service work: roped into the crown or up on the lift, over roofs, fences, and everything else that can&rsquo;t be dropped on.</p>
+    </div>
+    <div class="proof-grid">
+      <figure class="work-item"><img src="assets/gallery-large-removal.webp" width="600" height="800" loading="lazy" decoding="async" alt="Bucket crew sectionalizing a large tree beside a Brownwood home"><figcaption><span>Large removal beside a home.</span><span class="where">Controlled removal</span></figcaption></figure>
+      <figure class="work-item"><img src="assets/gallery-stump-grinding.webp" width="600" height="800" loading="lazy" decoding="async" alt="SC Tree Service grinding a stump below grade"><figcaption><span>The stump handled after the tree comes down.</span><span class="where">Stump grinding</span></figcaption></figure>
+      <figure class="work-item"><img src="assets/gallery-haul-off.webp" width="600" height="800" loading="lazy" decoding="async" alt="Cut trunk sections loaded for removal"><figcaption><span>Heavy wood loaded and hauled away.</span><span class="where">Debris removal</span></figcaption></figure>
+      <figure class="work-item"><img src="assets/gallery-finished-cleanup.webp" width="600" height="800" loading="lazy" decoding="async" alt="Clean property after SC Tree Service completed removal work"><figcaption><span>The property after the work is complete.</span><span class="where">Finished clean</span></figcaption></figure>
+      <figure class="work-item"><img src="assets/gallery-cleanup.webp" width="800" height="600" loading="lazy" decoding="async" alt="Chipper and crew clearing limbs after tree work"><figcaption><span>Limbs processed and the site cleared.</span><span class="where">Cleanup</span></figcaption></figure>
+      <figure class="work-item"><img src="assets/gallery-lift-work.webp" width="600" height="800" loading="lazy" decoding="async" alt="Lift crew working high in a large tree beside a home"><figcaption><span>High work handled from the lift.</span><span class="where">Bucket lift</span></figcaption></figure>
+    </div>
+  </div>
+</section>
 
 <!-- ============================ PROCESS ============================ -->
 <section class="section process" aria-labelledby="process-h">
@@ -480,10 +508,10 @@ I'll attach photos in this message.</pre>
       <div>
         <h3>Services</h3>
         <ul>
-          <li><a href="#services">Tree Removal</a></li>
-          <li><a href="#services">Tree Trimming &amp; Pruning</a></li>
-          <li><a href="#services">Stump Grinding</a></li>
-          <li><a href="#storm">Storm Cleanup</a></li>
+          <li><a href="tree-removal-brownwood-tx/">Tree Removal</a></li>
+          <li><a href="tree-trimming-brownwood-tx/">Tree Trimming &amp; Pruning</a></li>
+          <li><a href="stump-grinding-brownwood-tx/">Stump Grinding</a></li>
+          <li><a href="storm-cleanup-brownwood-tx/">Storm Cleanup</a></li>
           <li><a href="#services">Debris Removal</a></li>
         </ul>
       </div>
@@ -524,16 +552,6 @@ I'll attach photos in this message.</pre>
       <!-- STEP 1 -->
       <fieldset class="step is-active" id="step-1" data-step="1">
         <legend class="visually-hidden">Step 1: who you are and what you need</legend>
-        <div class="field" data-name="name">
-          <label for="q-name">Name</label>
-          <input id="q-name" name="name" type="text" autocomplete="name" required>
-          <p class="err" id="q-name-err">Please add your name so Saul knows who&rsquo;s texting.</p>
-        </div>
-        <div class="field" data-name="phone">
-          <label for="q-phone">Mobile number</label>
-          <input id="q-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" required>
-          <p class="err" id="q-phone-err">Please add the number you want the callback on.</p>
-        </div>
         <div class="field" data-name="service">
           <label for="q-service">Service needed</label>
           <select id="q-service" name="service" required>
@@ -561,10 +579,6 @@ I'll attach photos in this message.</pre>
       <fieldset class="step" id="step-2" data-step="2">
         <legend class="visually-hidden">Step 2: details about the tree</legend>
         <div class="field">
-          <label for="q-count">Number of trees <span class="opt-note">(optional)</span></label>
-          <input id="q-count" name="count" type="text" inputmode="numeric" placeholder="e.g. 1">
-        </div>
-        <div class="field">
           <span class="group-label" id="near-label">What is the tree close to?</span>
           <div class="chips" role="group" aria-labelledby="near-label">
             <label><input type="checkbox" name="near" value="House">House</label>
@@ -590,14 +604,6 @@ I'll attach photos in this message.</pre>
           <label for="q-desc">Short description <span class="opt-note">(optional)</span></label>
           <textarea id="q-desc" name="desc" maxlength="400" placeholder="Anything else Saul should know"></textarea>
           <p class="char-count" id="q-desc-count" aria-live="polite">0 / 400</p>
-        </div>
-        <div class="field">
-          <span class="group-label" id="reply-label">Preferred response</span>
-          <div class="chips" role="radiogroup" aria-labelledby="reply-label">
-            <label><input type="radio" name="reply" value="Call">Call</label>
-            <label><input type="radio" name="reply" value="Text" checked>Text</label>
-            <label><input type="radio" name="reply" value="Either">Either</label>
-          </div>
         </div>
         <p class="attach-note">After Messages opens, attach 2&ndash;3 photos showing the full tree, the base, and anything nearby.</p>
         <div class="drawer__nav">

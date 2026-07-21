@@ -175,9 +175,10 @@ button{font:inherit;color:inherit}
 .trust-row li::before{content:"";width:7px;height:7px;background:var(--orange)}
 .hero__media{position:absolute;inset:0;z-index:1}
 .hero__media img,.hero__media video{width:100%;height:100%;object-fit:cover;object-position:68% 22%}
-.hero__video{position:absolute;inset:0;z-index:0}
+.hero__video{position:absolute;inset:0;z-index:1;display:block;opacity:0;transition:opacity .22s ease}
+.hero__media.is-video-playing .hero__video{opacity:1}
 .hero__media::after{ /* directional scrim keeps copy readable over the photo */
-  content:"";position:absolute;inset:0;
+  content:"";position:absolute;inset:0;z-index:2;pointer-events:none;
   background:linear-gradient(180deg,rgba(15,17,19,.62) 0%,rgba(15,17,19,.78) 58%,rgba(15,17,19,.9) 100%);
 }
 @media(min-width:880px){
@@ -228,6 +229,12 @@ button{font:inherit;color:inherit}
 .review-feature .review__by{color:var(--ink-faint)}
 .review-feature .review__by strong{color:var(--ink-soft)}
 
+.reputation{background:var(--cream);color:var(--ink);border-block:1px solid var(--line-cream)}
+.reputation__row{min-height:68px;display:flex;align-items:center;justify-content:center;gap:10px 22px;flex-wrap:wrap;text-align:center}
+.reputation strong{font-family:var(--font-display);font-size:1.15rem;text-transform:uppercase;letter-spacing:.03em}
+.reputation strong span{color:var(--orange);letter-spacing:.1em;margin-right:.45em}
+.reputation__row>span{color:var(--ink-soft)}
+
 /* ==========================================================================
    services ledger
    ========================================================================== */
@@ -249,6 +256,8 @@ button{font:inherit;color:inherit}
 }
 .svc h3{font-family:var(--font-display);font-weight:700;text-transform:uppercase;
   font-size:clamp(1.5rem,3.6vw,2.05rem);letter-spacing:.01em;color:var(--bone);margin-bottom:.3em}
+.svc h3 a{color:inherit;text-decoration:none}
+.svc h3 a:hover{text-decoration:underline;text-decoration-color:var(--orange);text-underline-offset:.15em}
 .svc__body p{color:var(--bone-soft);max-width:56ch}
 .svc__uses{margin:.7em 0 0;padding:0;list-style:none;display:flex;flex-wrap:wrap;gap:8px}
 .svc__uses li{font-size:.8rem;font-weight:500;letter-spacing:.04em;color:var(--bone-soft);
@@ -295,6 +304,21 @@ button{font:inherit;color:inherit}
 .msg-preview .dim{color:var(--bone-faint)}
 .quote-demo__label{font-size:.7rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;
   color:var(--bone-faint);margin:0 0 12px}
+
+/* ==========================================================================
+   work (editorial photos)
+   ========================================================================== */
+.proof-grid{display:grid;gap:clamp(14px,2.5vw,24px)}
+@media(min-width:680px){.proof-grid{grid-template-columns:repeat(2,1fr)}}
+@media(min-width:1040px){.proof-grid{grid-template-columns:repeat(3,1fr)}}
+.work-item{margin:0;position:relative}
+.work-item img{width:100%;aspect-ratio:4/5;object-fit:cover;border:1px solid var(--char-3);border-radius:var(--radius)}
+.work-item figcaption{
+  display:flex;justify-content:space-between;gap:14px;align-items:baseline;
+  padding:12px 2px 0;color:var(--bone-soft);font-size:.92rem;
+}
+.work-item figcaption .where{font-size:.74rem;font-weight:600;letter-spacing:.13em;
+  text-transform:uppercase;color:var(--bone-faint);flex:none}
 
 /* lightbox (opened from the service photos) */
 .lightbox{border:0;padding:0;background:transparent;max-width:min(94vw,900px);max-height:92vh}
@@ -535,6 +559,18 @@ body{padding-bottom:calc(var(--bar-h) + env(safe-area-inset-bottom,0))}
 .flow .auto{font-size:.8rem;color:var(--bone-faint)}
 .opt-note-band{font-size:.85rem;color:var(--bone-faint);border-left:3px solid var(--char-3);
   padding-left:14px;max-width:56ch}
+.offer-card{background:var(--cream);color:var(--ink);padding:clamp(24px,5vw,48px);border-radius:4px;max-width:860px}
+.offer-card__price{font-family:var(--font-display);font-weight:700;font-size:clamp(3.2rem,9vw,5.6rem);line-height:1;color:var(--ink)}
+.offer-card__term{font-family:var(--font-display);font-size:1.4rem;color:var(--ink-soft)}
+.offer-card .saul-benefits li,.offer-card p{color:var(--ink-soft)}
+.offer-card .saul-benefits li::before{background:var(--orange)}
+.compare-grid{display:grid;gap:18px}
+@media(min-width:780px){.compare-grid{grid-template-columns:1fr 1fr}}
+.compare-grid article{border:1px solid var(--char-3);padding:clamp(22px,4vw,36px);border-radius:4px;background:var(--char-2)}
+.compare-grid__new{border-color:var(--orange)!important}
+.compare-grid h3{font-family:var(--font-display);font-size:1.6rem;text-transform:uppercase;color:var(--bone);margin-bottom:.8em}
+.compare-grid ul{padding-left:1.2em;color:var(--bone-soft)}
+.compare-grid li{margin:.65em 0}
 .saul-sec{display:grid;gap:clamp(24px,4vw,52px)}
 @media(min-width:880px){
   .saul-sec{grid-template-columns:minmax(0,1fr) minmax(0,1fr);align-items:center}
