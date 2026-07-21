@@ -1,7 +1,7 @@
 # SC Tree Service LLC — website concept
 
 Static site (plain HTML/CSS/JS, no build step) for SC Tree Service LLC,
-Brownwood, TX. Deployed on Cloudflare Pages at https://sctree.agaviai.com.
+Brownwood, TX. Deployed on Cloudflare Pages at https://sctreellc.agaviai.com.
 
 ## Pages
 
