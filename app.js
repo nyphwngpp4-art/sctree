@@ -87,7 +87,7 @@
   /* ---------- draft persistence (session only) ---------- */
   function serializeForm() {
     var data = {};
-    ['name', 'phone', 'service', 'location', 'count', 'desc'].forEach(function (k) {
+    ['service', 'location', 'desc'].forEach(function (k) {
       var el = form.elements[k];
       if (el) { data[k] = el.value; }
     });
@@ -110,7 +110,7 @@
     if (!raw) { return; }
     try {
       var d = JSON.parse(raw);
-      ['name', 'phone', 'service', 'location', 'count', 'desc'].forEach(function (k) {
+      ['service', 'location', 'desc'].forEach(function (k) {
         if (form.elements[k] && typeof d[k] === 'string') { form.elements[k].value = d[k]; }
       });
       form.querySelectorAll('input[name="near"]').forEach(function (c) {
@@ -142,7 +142,7 @@
   /* ---------- validation ---------- */
   function validateStep1() {
     var ok = true;
-    ['name', 'phone', 'service', 'location'].forEach(function (k) {
+    ['service', 'location'].forEach(function (k) {
       var el = form.elements[k];
       var wrap = el.closest('.field');
       var valid = !!(el.value && el.value.trim());
@@ -165,14 +165,11 @@
     var lines = [
       'SC TREE ESTIMATE REQUEST',
       '',
-      'Name: ' + d.name.trim(),
-      'Phone: ' + d.phone.trim(),
       'Location: ' + d.location.trim(),
       'Service: ' + d.service,
-      'Number of trees: ' + (d.count.trim() || 'Not specified'),
       'Near: ' + near,
       'Urgency: ' + (d.urgency || 'Not specified'),
-      'Preferred reply: ' + (d.reply || 'Either')
+      'Reply by: Text or call this number'
     ];
     if (d.desc.trim()) {
       lines.push('', 'Details:', d.desc.trim());
@@ -334,61 +331,18 @@
     if (lbOpener) { lbOpener.focus(); }
   });
 
-  /* ====================================================================
-     Hero video enhancement.
-     The page ships with a real-photo hero. If hero-loop video files are
-     added to /assets later, this swaps them in - but never for users who
-     prefer reduced motion or have data-saver on.
-     ==================================================================== */
+  /* Keep the direct HTML video fast, while respecting reduced motion/data saver. */
   (function heroVideo() {
     var media = document.getElementById('hero-media');
-    // Opt-in: add data-hero-video to #hero-media once the loop files exist in
-    // /assets, so the page never probes for files that are not deployed.
-    if (!media || !media.hasAttribute('data-hero-video')) { return; }
+    var video = media && media.querySelector('video');
+    if (!media || !video) { return; }
     var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     var conn = navigator.connection || {};
-    if (reduced || conn.saveData || /(^|-)2g/.test(conn.effectiveType || '')) { return; }
-
-    // mp4 (H.264) first for Safari; VP9 webm is the fallback. Build the
-    // element, set muted BEFORE anything else (required for autoplay on
-    // Safari/iOS), append to the DOM, then load() and play(). Appending
-    // before load() is the order Safari expects; waiting on 'canplay' to
-    // append is unreliable there.
-    var sources = [
-      { url: 'assets/hero-loop.mp4', type: 'video/mp4' },
-      { url: 'assets/hero-loop.webm', type: 'video/webm' }
-    ];
-    var v = document.createElement('video');
-    v.muted = true;
-    v.defaultMuted = true;
-    v.setAttribute('muted', '');
-    v.loop = true;
-    v.setAttribute('loop', '');
-    v.autoplay = true;
-    v.setAttribute('autoplay', '');
-    v.playsInline = true;
-    v.setAttribute('playsinline', '');
-    v.setAttribute('webkit-playsinline', '');
-    v.preload = 'auto';
-    v.setAttribute('aria-hidden', 'true');
-    v.setAttribute('tabindex', '-1');
-    v.className = 'hero__video';
-    v.poster = 'assets/work-climber-639.jpg';
-    sources.forEach(function (s) {
-      var src = document.createElement('source');
-      src.src = s.url;
-      src.type = s.type;
-      v.appendChild(src);
-    });
-    // If nothing can decode, leave the still-photo hero untouched.
-    v.addEventListener('error', function () {
-      if (v.parentNode) { v.parentNode.removeChild(v); }
-    });
-    media.appendChild(v);
-    v.load();
-    var attempt = v.play();
-    if (attempt && typeof attempt.catch === 'function') {
-      attempt.catch(function () { /* autoplay attribute still applies; poster stays up otherwise */ });
+    if (reduced || conn.saveData || /(^|-)2g/.test(conn.effectiveType || '')) {
+      video.remove();
+      return;
     }
+    video.addEventListener('playing', function () { media.classList.add('is-video-playing'); }, { once: true });
+    video.play().catch(function () { video.remove(); });
   })();
 })();
